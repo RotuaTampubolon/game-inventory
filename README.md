@@ -15,3 +15,26 @@ Aplikasi CLI berbasis Java untuk mengelola inventory karakter dalam game.
 - Maven
 
 ## Setup (coming soon)
+
+## ⚙️ Setup & Run
+
+### 1. Prerequisites
+- Java 17+
+- PostgreSQL
+- Maven
+
+### 2. Setup Database
+```bash
+psql -U postgres -c "CREATE DATABASE game_inventory;"
+psql -U postgres -d game_inventory -f sql/schema.sql
+```
+
+### 3. Konfigurasi Koneksi
+Edit `src/main/java/com/gameinventory/db/DBConnection.java`:
+- Ganti `USER` dan `PASS` sesuai PostgreSQL lokal kamu
+
+### 4. Run Program
+```bash
+mvn compile
+mvn exec:java -Dexec.mainClass="com.gameinventory.Main"
+```
