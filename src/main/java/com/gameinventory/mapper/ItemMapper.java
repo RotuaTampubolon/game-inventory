@@ -1,5 +1,5 @@
 package com.gameinventory.mapper;
-
+import com.gameinventory.factory.ItemFactory;
 import com.gameinventory.db.DBConnection;
 import com.gameinventory.exception.ItemNotFoundException;
 import com.gameinventory.model.Item;
@@ -67,7 +67,7 @@ public class ItemMapper implements ItemRepository {
                 items.add(mapRow(rs));
             }
         } catch (SQLException e) {
-            throw new RuntimeException("❌ Gagal mengambil data item: " + e.getMessage());
+            throw new RuntimeException(" Gagal mengambil data item: " + e.getMessage());
         }
         return items;
     }
@@ -80,26 +80,13 @@ public class ItemMapper implements ItemRepository {
             stmt.setString(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("❌ Gagal menghapus item: " + e.getMessage());
+            throw new RuntimeException(" Gagal menghapus item: " + e.getMessage());
         }
     }
 
-    // TODO: Geralda yang akan replace method ini dengan ItemFactory
-    private Item mapRow(ResultSet rs) throws SQLException {
-        ItemType type   = ItemType.valueOf(rs.getString("type"));
-        Rarity   rarity = Rarity.valueOf(rs.getString("rarity"));
-        // placeholder juga akan diganti ItemFactory oleh Geralda 
-        return new Item(
-                rs.getString("id"),
-                rs.getString("name"),
-                rs.getString("description"),
-                rarity, type,
-                rs.getInt("trade_value")
-        ) {
-            @Override
-            public String getInfo() {
-                return toString();
-            }
-        };
-    }
+private Item mapRow(ResultSet rs)
+        throws SQLException {
+
+    return ItemFactory.fromResultSet(rs);
 }
+    }

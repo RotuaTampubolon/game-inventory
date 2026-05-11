@@ -1,5 +1,5 @@
 package com.gameinventory.cli;
-
+import com.gameinventory.factory.ItemFactory;
 import com.gameinventory.exception.InventoryFullException;
 import com.gameinventory.exception.ItemNotFoundException;
 import com.gameinventory.model.*;
@@ -83,10 +83,13 @@ public class InventoryCLI {
             return;
         }
 
-        // Placeholder item — Anggota 2 akan replace ini dengan ItemFactory
-        Item item = new Item(UUID.randomUUID().toString(), name, desc, rarity, type, tradeValue) {
-            @Override public String getInfo() { return toString(); }
-        };
+Item item = ItemFactory.create(
+        type,
+        name,
+        desc,
+        rarity,
+        tradeValue
+);
 
         try {
             service.addItem(item);
