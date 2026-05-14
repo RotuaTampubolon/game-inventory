@@ -10,8 +10,8 @@ public class DBConnection {
     private Connection connection;
 
     private static final String URL  = "jdbc:postgresql://localhost:5432/game_inventory";
-    private static final String USER = "postgres"; //username PostegreSQL kalian buat yaa
-    private static final String PASS = "password"; //password PostegreSQL kalian buat yaa, dan hapus komen ini 
+    private static final String USER = "postgres"; 
+    private static final String PASS = "0000"; 
 
     private DBConnection() {
         try {
